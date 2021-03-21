@@ -6,7 +6,8 @@ import Outcome from './Outcome';
 
 const Question = () => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [outcome, setOutcome] = useState(0);
+	const [outcome, setOutcome] = useState(false);
+	const [showOutcome, setShowOutcome] = useState(false);
 
 	const handleQuizAnswer = (answerValue, nextQuestion) => {
 		let sum = 0;
@@ -14,17 +15,23 @@ const Question = () => {
 		console.log('sum', sum);
 
 		if (nextQuestion) {
-			setCurrentQuestion(currentQuestion + answerValue);
+			setCurrentQuestion(currentQuestion + answerValue + 1);
 			console.log(currentQuestion);
 			return;
 		}
 
 		setOutcome(sum);
+		setShowOutcome(true);
 	};
 
-	if (outcome > 0) {
+	if (showOutcome) {
 		return (
-			<Outcome title={outcomes[outcome].title} body={outcomes[outcome].body} />
+			<Outcome
+				outcome={{
+					title: outcomes[outcome].title,
+					body: outcomes[outcome].body,
+				}}
+			/>
 		);
 	}
 	return (
