@@ -16,6 +16,7 @@ const questions = [
 		answers: [
 			{ answer: 'Answer 1', value: 1 },
 			{ answer: 'Answer 2', value: 2 },
+			{ answer: 'Answer 3', value: 3 },
 		],
 	},
 	{
@@ -24,7 +25,8 @@ const questions = [
 		imageUrl: 'www.photorul.com',
 		answers: [
 			{ answer: 'Answer 1', value: 1 },
-			{ answer: 'Answer 2', value: 2 },
+			{ answer: 'Answer 3', value: 2 },
+			{ answer: 'Answer 3', value: 3 },
 		],
 	},
 ];
