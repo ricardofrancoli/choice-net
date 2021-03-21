@@ -4,9 +4,9 @@ import questions from '../helpers/questions';
 import Outcome from './Outcome';
 // import homepageImg from '../images/homepageImgMin.jpg';
 
-const Question = () => {
+const Quiz = ({ finishQuiz }) => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [outcome, setOutcome] = useState(false);
+	const [outcome, setOutcome] = useState(0);
 	const [showOutcome, setShowOutcome] = useState(false);
 
 	const handleQuizAnswer = (answerValue, nextQuestion) => {
@@ -26,12 +26,15 @@ const Question = () => {
 
 	if (showOutcome) {
 		return (
-			<Outcome
-				outcome={{
-					title: outcomes[outcome].title,
-					body: outcomes[outcome].body,
-				}}
-			/>
+			<div>
+				<Outcome
+					outcome={{
+						title: outcomes[outcome].title,
+						body: outcomes[outcome].body,
+					}}
+					finishQuiz={finishQuiz}
+				/>
+			</div>
 		);
 	}
 	return (
@@ -50,4 +53,4 @@ const Question = () => {
 	);
 };
 
-export default Question;
+export default Quiz;
