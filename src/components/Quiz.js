@@ -6,46 +6,56 @@ import Outcome from './Outcome';
 
 const Quiz = ({ finishQuiz }) => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [outcome, setOutcome] = useState(0);
+	const [outcomeValue, setOutcomeValue] = useState(0);
 	const [showOutcome, setShowOutcome] = useState(false);
 
-	const handleQuizAnswer = (answerValue, nextQuestion) => {
-		let sum = 0;
-		sum += answerValue;
-		console.log('sum', sum);
-
-		if (nextQuestion) {
-			setCurrentQuestion(currentQuestion + answerValue + 1);
-			console.log(currentQuestion);
+	const handleQuizAnswer = (answerValue) => {
+		if (answerValue) {
+			setOutcomeValue(outcomeValue + answerValue);
+			let jumpQuestion;
+			answerValue === 2 ? (jumpQuestion = 1) : (jumpQuestion = 2);
+			setCurrentQuestion(currentQuestion + jumpQuestion);
 			return;
 		}
 
-		setOutcome(sum);
 		setShowOutcome(true);
 	};
 
-	if (showOutcome) {
+	if (showOutcome || currentQuestion >= questions.length) {
+		let filterValue;
+		if (outcomeValue < 4) {
+			filterValue = 1;
+		}
+
+		if (outcomeValue >= 4 && outcomeValue <= 7) {
+			filterValue = 2;
+		}
+
+		if (outcomeValue >= 8) {
+			filterValue = 3;
+		}
+
+		let outcome = outcomes.filter((outcome) => outcome.id === filterValue);
+
 		return (
 			<div>
 				<Outcome
 					outcome={{
-						title: outcomes[outcome].title,
-						body: outcomes[outcome].body,
+						title: outcome[0].title,
+						body: outcome[0].body,
 					}}
 					finishQuiz={finishQuiz}
 				/>
 			</div>
 		);
 	}
+
 	return (
 		<div>
 			{/* // <img src={homepageImg} alt='home-page' width='300px'></img> */}
 			<h1>{questions[currentQuestion].question}</h1>
 			{questions[currentQuestion].answers.map((answer, key) => (
-				<button
-					key={key}
-					onClick={() => handleQuizAnswer(answer.value, answer.nextQuestion)}
-				>
+				<button key={key} onClick={() => handleQuizAnswer(answer.value)}>
 					{answer.answer}
 				</button>
 			))}

@@ -6,12 +6,10 @@ import './App.css';
 const App = () => {
 	const [showQuiz, setShowQuiz] = useState(false);
 	const startQuiz = () => setShowQuiz(true);
-	const finishQuiz = () => {
-		setShowQuiz(false);
-	};
+	const finishQuiz = () => setShowQuiz(false);
 
 	if (!showQuiz) {
-		return <Home handleOnClick={startQuiz} />;
+		return <Home startQuiz={startQuiz} />;
 	}
 
 	return <Quiz finishQuiz={finishQuiz} />;
