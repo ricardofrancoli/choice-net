@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import outcomes from '../helpers/outcomes';
 import questions from '../helpers/questions';
 import Outcome from './Outcome';
+import Question from './Question';
 // import homepageImg from '../images/homepageImgMin.jpg';
 
 const Quiz = ({ finishQuiz }) => {
@@ -9,18 +10,27 @@ const Quiz = ({ finishQuiz }) => {
 	const [outcomeValue, setOutcomeValue] = useState(0);
 	const [showOutcome, setShowOutcome] = useState(false);
 
+	// Answers can have value 0, 1 or 2
+	// If an answer is 0, the quiz finishes straight away -> setShowOutcome(true)
+	// If an answer is 1 or 2:
+	// we add it to outComeValue -> this will be counted later and give us an outcome depending on the result
+	// then we jump 1 or 2 questions
+
 	const handleQuizAnswer = (answerValue) => {
 		if (answerValue) {
 			setOutcomeValue(outcomeValue + answerValue);
+
 			let jumpQuestion;
 			answerValue === 2 ? (jumpQuestion = 1) : (jumpQuestion = 2);
 			setCurrentQuestion(currentQuestion + jumpQuestion);
+
 			return;
 		}
 
 		setShowOutcome(true);
 	};
 
+	// If showOutcome is true or we run out of questions in the questions array we show the outcome to the user
 	if (showOutcome || currentQuestion >= questions.length) {
 		let filterValue;
 		if (outcomeValue < 4) {
@@ -51,15 +61,16 @@ const Quiz = ({ finishQuiz }) => {
 	}
 
 	return (
-		<div>
-			{/* // <img src={homepageImg} alt='home-page' width='300px'></img> */}
-			<h1>{questions[currentQuestion].question}</h1>
-			{questions[currentQuestion].answers.map((answer, key) => (
-				<button key={key} onClick={() => handleQuizAnswer(answer.value)}>
-					{answer.answer}
-				</button>
-			))}
-		</div>
+		<Question
+			currentQuestion={{
+				question: questions[currentQuestion].question,
+				answers: questions[currentQuestion].answers.map((answer, key) => (
+					<button key={key} onClick={() => handleQuizAnswer(answer.value)}>
+						{answer.answer}
+					</button>
+				)),
+			}}
+		/>
 	);
 };
 
