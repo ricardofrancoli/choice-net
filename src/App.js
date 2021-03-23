@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Home from './components/Home';
 import Quiz from './components/Quiz';
 import './App.css';
+// import { makeStyles } from '@material-ui/core/styles';
 
 const App = () => {
 	const [showQuiz, setShowQuiz] = useState(false);

@@ -3,18 +3,31 @@ import outcomes from '../helpers/outcomes';
 import questions from '../helpers/questions';
 import Outcome from './Outcome';
 import Question from './Question';
-// import homepageImg from '../images/homepageImgMin.jpg';
+import { Button, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+	root: {
+		background: 'red',
+		border: 0,
+		borderRadius: 15,
+		color: 'white',
+		padding: '0 30px',
+	},
+});
 
 const Quiz = ({ finishQuiz }) => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [outcomeValue, setOutcomeValue] = useState(0);
 	const [showOutcome, setShowOutcome] = useState(false);
 
+	const classes = useStyles();
+
 	// Answers can have value 0, 1 or 2
 	// If an answer is 0, the quiz finishes straight away -> setShowOutcome(true)
 	// If an answer is 1 or 2:
-	// we add it to outComeValue -> this will be counted later and give us an outcome depending on the result
-	// then we jump 1 or 2 questions
+	// -- we add it to outComeValue -> this will be counted later and give us an outcome depending on the result
+	// -- then we jump 1 or 2 questions
 
 	const handleQuizAnswer = (answerValue) => {
 		if (answerValue) {
@@ -60,15 +73,36 @@ const Quiz = ({ finishQuiz }) => {
 		);
 	}
 
+	const answersContainer = (
+		<Grid container justify={'center'} alignItems={'center'}>
+			{questions[currentQuestion].answers.map((answer, key) => (
+				<Grid
+					key={key}
+					item
+					container
+					xs={12}
+					sm={6}
+					display='flex'
+					justify='center'
+					style={{ marginTop: 20 }}
+				>
+					<Button
+						className={classes.root}
+						onClick={() => handleQuizAnswer(answer.value)}
+					>
+						{answer.answer}
+					</Button>
+				</Grid>
+			))}
+		</Grid>
+	);
+
 	return (
 		<Question
 			currentQuestion={{
+				imageUrl: questions[currentQuestion].imageUrl,
 				question: questions[currentQuestion].question,
-				answers: questions[currentQuestion].answers.map((answer, key) => (
-					<button key={key} onClick={() => handleQuizAnswer(answer.value)}>
-						{answer.answer}
-					</button>
-				)),
+				answers: answersContainer,
 			}}
 		/>
 	);
