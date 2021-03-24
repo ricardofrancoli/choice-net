@@ -8,11 +8,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
 	root: {
-		background: 'red',
-		border: 0,
-		borderRadius: 15,
-		color: 'white',
-		padding: '0 30px',
+		border: '1px solid #cf3476',
+		borderRadius: 20,
+		color: '#cf3476',
+		textTransform: 'none',
+		boxShadow: '0 0 5px 2px rgba(0, 0, 0, 0.05)',
+		'&:hover': {
+			background: '#fdedf4',
+		},
 	},
 });
 
@@ -46,14 +49,18 @@ const Quiz = ({ finishQuiz }) => {
 	// If showOutcome is true or we run out of questions in the questions array we show the outcome to the user
 	if (showOutcome || currentQuestion >= questions.length) {
 		let filterValue;
+
+		// Outcome 1
 		if (outcomeValue < 4) {
 			filterValue = 1;
 		}
 
+		// Outcome 2
 		if (outcomeValue >= 4 && outcomeValue <= 7) {
 			filterValue = 2;
 		}
 
+		// Outcome 3
 		if (outcomeValue >= 8) {
 			filterValue = 3;
 		}
@@ -80,15 +87,23 @@ const Quiz = ({ finishQuiz }) => {
 					key={key}
 					item
 					container
-					xs={12}
+					xs={11}
 					sm={6}
 					display='flex'
 					justify='center'
-					style={{ marginTop: 20 }}
+					style={{ margin: '10px 0', minWidth: '20vw' }}
 				>
 					<Button
 						className={classes.root}
+						variant='outlined'
+						color='secondary'
 						onClick={() => handleQuizAnswer(answer.value)}
+						style={{
+							maxWidth: '70%',
+							maxHeight: '8vh',
+							minWidth: '70%',
+							minHeight: '8vh',
+						}}
 					>
 						{answer.answer}
 					</Button>

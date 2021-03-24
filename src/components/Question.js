@@ -1,31 +1,49 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+	imageStyle: {
+		borderRadius: 20,
+		boxShadow: '0 0 5px 2px rgba(0, 0, 0, 0.1)',
+	},
+	spacingStyle: {
+		[theme.breakpoints.down('sm')]: {
+			minHeight: '95vh',
+			margin: '2.5vh 0',
+		},
+		[theme.breakpoints.up('sm')]: {
+			minHeight: '80vh',
+			margin: '10vh 0',
+		},
+	},
+}));
 
 const Question = ({ currentQuestion }) => {
+	const classes = useStyles();
+
 	return (
-		<div>
-			<Grid
-				container
-				direction={'column'}
-				spacing={0}
-				justify={'center'}
-				alignContent={'center'}
-				alignItems={'center'}
-				style={{ minHeight: '100vh' }}
-			>
-				<Grid item xs={12}>
-					<img src={currentQuestion.imageUrl} alt='home-page' width={300}></img>
-				</Grid>
-				<Grid item xs={12}>
-					<h1>{currentQuestion.question}</h1>
-				</Grid>
-				<Grid item xs={12}>
-					<Grid container justify={'center'} alignItems={'stretch'}>
-						{currentQuestion.answers}
-					</Grid>
-				</Grid>
+		<Grid
+			container
+			direction={'column'}
+			justify={'space-between'}
+			alignContent={'center'}
+			alignItems={'center'}
+			className={classes.spacingStyle}
+		>
+			<Grid item xs={8} sm={6} md={4}>
+				<img
+					src={currentQuestion.imageUrl}
+					alt='home-page'
+					width={'100%'}
+					className={classes.imageStyle}
+				></img>
 			</Grid>
-		</div>
+			<Grid item xs={8}>
+				<Typography variant='body1'>{currentQuestion.question}</Typography>
+			</Grid>
+			<Grid item>{currentQuestion.answers}</Grid>
+		</Grid>
 	);
 };
 
