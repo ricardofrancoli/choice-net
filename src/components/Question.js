@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
 		boxShadow: '0 0 5px 2px rgba(0, 0, 0, 0.1)',
 	},
 	spacingStyle: {
+		width: '100vw',
 		[theme.breakpoints.down('sm')]: {
 			minHeight: '95vh',
 			margin: '2.5vh 0',

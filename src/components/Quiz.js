@@ -5,6 +5,9 @@ import Outcome from './Outcome';
 import Question from './Question';
 import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+import '../index.css';
 
 const useStyles = makeStyles({
 	root: {
@@ -68,7 +71,12 @@ const Quiz = ({ finishQuiz }) => {
 		let outcome = outcomes.filter((outcome) => outcome.id === filterValue);
 
 		return (
-			<div>
+			<CSSTransition
+				in={showOutcome}
+				appear={true}
+				timeout={600}
+				classNames='fade'
+			>
 				<Outcome
 					outcome={{
 						title: outcome[0].title,
@@ -76,7 +84,7 @@ const Quiz = ({ finishQuiz }) => {
 					}}
 					finishQuiz={finishQuiz}
 				/>
-			</div>
+			</CSSTransition>
 		);
 	}
 
@@ -113,13 +121,21 @@ const Quiz = ({ finishQuiz }) => {
 	);
 
 	return (
-		<Question
-			currentQuestion={{
-				imageUrl: questions[currentQuestion].imageUrl,
-				question: questions[currentQuestion].question,
-				answers: answersContainer,
-			}}
-		/>
+		<TransitionGroup>
+			<CSSTransition
+				key={questions[currentQuestion].id}
+				timeout={300}
+				classNames='slide'
+			>
+				<Question
+					currentQuestion={{
+						imageUrl: questions[currentQuestion].imageUrl,
+						question: questions[currentQuestion].question,
+						answers: answersContainer,
+					}}
+				/>
+			</CSSTransition>
+		</TransitionGroup>
 	);
 };
 

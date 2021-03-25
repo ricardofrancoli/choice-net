@@ -1,4 +1,43 @@
+html,
 body {
 	margin: 0;
+	padding: 0;
 	font-family: 'Roboto';
+}
+
+.fade-appear {
+	opacity: 0;
+	z-index: 1;
+}
+
+.fade-appear.fade-appear-active {
+	opacity: 1;
+	transition: opacity 600ms linear;
+}
+
+.slide-enter {
+	opacity: 0;
+	transform: translateX(50px);
+	z-index: 1;
+}
+
+.slide-enter.slide-enter-active {
+	opacity: 1;
+	transform: translateX(0);
+	transition: opacity 300ms linear 100ms, transform 300ms ease-in-out 100ms;
+}
+
+.slide-exit {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.slide-exit.slide-exit-active {
+	opacity: 0;
+	transform: translateX(50px);
+	transition: opacity 150ms linear, transform 150ms ease-out;
+}
+
+.slide-exit-done {
+	opacity: 0;
 }
