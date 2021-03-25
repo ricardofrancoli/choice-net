@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import homepageImg from '../images/homepageImgMin.jpg';
 import { Button, Grid, Typography } from '@material-ui/core';
 
@@ -28,7 +28,7 @@ const Home = ({ startQuiz }) => {
 					style={{ backgroundColor: '#cf3476', color: '#fcfcfc' }}
 					onClick={startQuiz}
 				>
-					Start!
+					Start
 				</Button>
 			</Grid>
 		</Grid>
