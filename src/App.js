@@ -4,14 +4,13 @@ import Quiz from './components/Quiz';
 
 const App = () => {
 	const [showQuiz, setShowQuiz] = useState(false);
-	const startQuiz = () => setShowQuiz(true);
-	const finishQuiz = () => setShowQuiz(false);
+	const toggleQuiz = () => setShowQuiz(!showQuiz);
 
-	if (!showQuiz) {
-		return <Home startQuiz={startQuiz} />;
+	if (showQuiz) {
+		return <Quiz finishQuiz={toggleQuiz} />;
 	}
 
-	return <Quiz finishQuiz={finishQuiz} />;
+	return <Home startQuiz={toggleQuiz} />;
 };
 
 export default App;

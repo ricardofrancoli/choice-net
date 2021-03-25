@@ -6,7 +6,7 @@ const questions = [
 	{
 		id: 1,
 		question:
-			'I have added random definitions of questions to show how the questions work in different lengths.',
+			'I have added random definitions of questions to show how they work in different lengths.',
 		imageUrl:
 			'https://images.unsplash.com/photo-1597482404463-9c4c9f5afe58?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80',
 		answers: [
@@ -18,7 +18,7 @@ const questions = [
 	},
 	{
 		id: 2,
-		question: 'A sentence worded or expressed so as to elicit information',
+		question: 'A sentence worded or expressed so as to elicit information.',
 		imageUrl:
 			'https://images.unsplash.com/photo-1615653051904-d8e1e5b30519?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80',
 		answers: [
@@ -30,7 +30,7 @@ const questions = [
 	},
 	{
 		id: 3,
-		question: 'Ask (someone) questions, especially in an official context',
+		question: 'Ask (someone) questions, especially in an official context.',
 		imageUrl:
 			'https://images.unsplash.com/photo-1616445138711-4e61bcf4a474?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80',
 		answers: [
